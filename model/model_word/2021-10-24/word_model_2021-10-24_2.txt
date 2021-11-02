@@ -1,0 +1,14 @@
+len(X_train): 94123 
+len (X_valid): 16611 
+max_str_len: 11 
+num_of_characters: 148 
+num_of_timestamps: 31 
+batch_size: 128 
+epochs: 100 
+
+ Model được train từ model word_model_last_6.h5
+Cùng với bộ data aug_word_data4.csv
+Average CER: 10.62%
+Average WER: 23.52%
+Correct characters predicted : 86.88%
+Correct words predicted      : 76.48%
