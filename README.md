@@ -2,8 +2,8 @@
 ## Table of contents
 * [1. Introduction](#1-Introduction)
 * [2. Dataset](#2-Dataset)
-* [2. Primary features](#2-Primary-features)
-* [3. Scaling data](#3-Scaling-data)
+* [3. Image preprocessing](#3-Image-preprocessing)
+* [4. Word segmentation](#4-Word-segmentation)
 * [4. Imbalanced data](#4-Imbalanced-data)
 * [5. Model](#5-Model)
 * [6. K - fold cross validation](#6-K-fold-cross-validation)
@@ -19,7 +19,6 @@ The whole thesis is to help teacher update score into Excel automatically after 
 As you can see, I use my university's test paper. My name is Mai Chi Bao and my student ID (MSSV) is 1710586. Those are handwritten information and I wanna cut them out. Of course the score too. But we will dicuss about it later at other repository.
 
 
-Extract handwritten information like name, student ID and then recognize them with CRNN-CTC. Using lexicon search on class list to help teacher on updating score faster
 https://drive.google.com/drive/folders/1z2GdAg8uz-ZCni1glbG1A-M6f7-R_6Y2?usp=sharing
 
 Model
@@ -34,18 +33,38 @@ Those are raw file, of course they won't help at all without Data Augmentation
 * Adding blob, line noise
 * Random Cutout
 * Rotate and Scale
-I applied them all in `source/prepare_MSSV_dataset.py` and `source/imgtocsv.py` for both name and student ID training
-I found the those methods are not enough, so the solution is to collect more real data. I did add about 250 images for each, with Data augmentation I can make it to 20000 images and the result was good
 
-## 2. Primary features
-The feature extracted in this project were MFCCs, Mel frequency spectrogram, chroma and those are mean value `np.mean`. 
+I applied them all in `source/prepare_MSSV_dataset.py` and `source/imgtocsv.py` for both name and student ID training. I found the those methods are not enough, so the solution is to collect more real data. I did add about 250 images for each, with Data augmentation I can make it to 20000 images and the result was good
 
-## 3. Scaling data
->"Just to give you an example — if you have multiple independent variables like age, salary, and height; With their range as (18–100 Years), 
-(25,000–75,000 Euros), and (1–2 Meters) respectively, feature scaling would help them all to be in the same range, 
-for example- centered around 0 or in the range (0,1) depending on the scaling technique."
+## 3. Image Preprocessing
+You can find code in `source/Preprocessing.py` 
+The flow of this stage is:
+1. Image Alignment 
+2. Maximize Contrast
+3. Otsu Threshold
+4. Remove line/circle
 
-Reference: https://www.atoti.io/when-to-perform-a-feature-scaling/
+When we first take the input image, we take the background information too, and the picture is not in the right direction which is hard to extract and recognize. With the help of Image Alignment, the work is much easier. 
+
+<p align="center"><img src="doc/matches.jpg" width="500"></p>
+<p align="center"><i>Hình 2. Image Alignment </i></p>
+
+Reference: https://www.pyimagesearch.com/2020/08/31/image-alignment-and-registration-with-opencv/
+
+Then I crop Images I need with fixed pixels at all times
+
+<p align="center"><img src="doc/MSSV_crop.jpg" width="200"></p>
+<p align="center"><i>Hình 3. MSSV_crop.jpg </i></p>
+
+I have to maximize contrast with [Top hat and Black hat method](https://www.quora.com/Why-use-the-top-hat-and-black-hat-morphological-operations-in-image-processing). I found this can hold back lots of information after Otsu Threshold, especially with blur image. I did compare between Adaptive Threshold and Otsu Theshold
+
+Adaptive Threshold which we know that works really well with variations in lighting conditions, shadowing, etc... You can visit this [website](https://www.pyimagesearch.com/2021/05/12/adaptive-thresholding-with-opencv-cv2-adaptivethreshold/) to know more. But it also retain noise. It's like **a lot of noise** which is hard to remove line and recognize even having Gaussian Blur step before. Otsu turns out performing so well, I guess that because the small image after croping reduce the affect of light variance.   
+
+<p align="center"><img src="doc/removeline_122/namecrop_giaythi5.jpg" width="300"></p>
+<p align="center"><i>Hình 4. Image after removing line </i></p>
+
+## 4. Word segmentation
+I have compare between EAST and scale Space techniques 
 
 ## 4. Imbalanced data
 
