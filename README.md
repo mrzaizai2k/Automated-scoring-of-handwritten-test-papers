@@ -126,7 +126,12 @@ The fisrt 2 tables are the evalution of 122 test papers of just my name and MSSV
 I have 70 test papers of other students written by 5 people (mostly by my family and friends due to Covid - 19). The accuracy is **97.14%** (just 2 out of 70 are uncorrect)
 
 Conclusion:
-* 
+* Add more real data to improve the outcome
+* The combination of CRNN - CTC, Attention, Lexicon Search
+* If you want to train your model faster, you should add Batch Normalization and Use Early stopping
+* Changing Learning Rate help. But just in it's first time. The more you use it, the easier your model get overfit. And it slows down the training phase for nothing
+* Choosing the right Data Augmentation methods can boost the result up to 50%. Working on simulated data is fine, but if you want to use it in real life, you would need real dataset size is small
+* Don't use Drop out before RNN layer b/c it won't help. I guess it takes all the data RNN need away.
 
 
 
