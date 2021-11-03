@@ -107,6 +107,10 @@ You can find the `.h5` model in my [google drive](https://drive.google.com/drive
 
 ## 7. Result
 
+The differences in word and number dataset lead to a cascade of differences in the way I trained model, set up parameters and evaluated. Here for the name recognition I will evaluate mainly on methods that I used in training phase. Due to the lack of real data, I would evaluate number recognition on the way I created dataset
+
+The fisrt 2 tables are the evalution of 122 test papers of just my name and MSSV (with a wide range of light, camera angle and distance, picture resolution...) And use them to find my index in my class list of 245 students 
+
 **Name Recognition**
 |      | CRNN + CTC | + Data Augmentation | + Learning Rate changing | + Attention | + Lexicon search |
 | -----|:---: |:---:|:---: |:---:|:---:|
@@ -119,8 +123,10 @@ You can find the `.h5` model in my [google drive](https://drive.google.com/drive
 | CER | 63.82%	| 48.24%	| 45.55%	| 13.58%	| 3.63%	| 2.58%|
 | WER | 100.00%	 | 100.00%	| 100.00% |	63.11%	| 22.95%	| 6.56%|
 
+I have 70 test papers of other students written by 5 people (mostly by my family and friends due to Covid - 19). The accuracy is **97.14%** (just 2 out of 70 are uncorrect)
 
-
+Conclusion:
+* 
 
 
 
