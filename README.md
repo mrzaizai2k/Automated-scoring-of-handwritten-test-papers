@@ -14,7 +14,7 @@ This project is a part of my thesis. In short, you guys may or may not know that
 The whole thesis is to help teacher update scores into Excel automatically after marking their students’ tests. But in this project we just extract information such as names, student ID, and recognize them to prepare for later stage.
 
 <p align="center"><img src="data/sample/giaythi5.jpg" width="500"></p>
-<p align="center"><i>Hình 1. Test paper of Ho Chi Minh University of Technology </i></p>
+<p align="center"><i>Figure 1. Test paper of Ho Chi Minh University of Technology </i></p>
 
 As you can see, I use my university's test paper. My name is Mai Chi Bao and my student ID (MSSV) is 1710586. Those are handwritten information and I wanna cut them out. Of course the score too. But we will dicuss about it later at other repository.
 
@@ -42,27 +42,27 @@ The flow of this stage is:
 When we first take the input image, we take the background information too, and the picture is not in the right direction which is hard to extract and recognize. With the help of Image Alignment, the work is much easier. 
 
 <p align="center"><img src="doc/matches.jpg" width="500"></p>
-<p align="center"><i>Hình 2. Image Alignment </i></p>
+<p align="center"><i>Figure 2. Image Alignment </i></p>
 
 Reference: https://www.pyimagesearch.com/2020/08/31/image-alignment-and-registration-with-opencv/
 
 Then I crop images I need with fixed pixels at all times
 
 <p align="center"><img src="doc/MSSV_crop.jpg" width="200"></p>
-<p align="center"><i>Hình 3. MSSV_crop.jpg </i></p>
+<p align="center"><i>Figure 3. MSSV_crop.jpg </i></p>
 
 I used contrast maximization with [Top hat and Black hat method](https://www.quora.com/Why-use-the-top-hat-and-black-hat-morphological-operations-in-image-processing). I found this can hold back lots of necessary information after Otsu Threshold, especially with blur images. 
 
 I did compare between Adaptive Threshold and Otsu Theshold. Adaptive Threshold which we know that works really well with variations in lighting conditions, shadowing... You can visit this [site](https://www.pyimagesearch.com/2021/05/12/adaptive-thresholding-with-opencv-cv2-adaptivethreshold/) to know more. But it also retains noise. It's like **a lot of noise** which is hard to remove line and recognize even having Gaussian Blur step before. Otsu turns out performing so well, I guess that because the small size of image after cropping reduces the effect of light variance.   
 
 <p align="center"><img src="doc/removeline_122/namecrop_giaythi5.jpg" width="500"></p>
-<p align="center"><i>Hình 4. Image after removing line </i></p>
+<p align="center"><i>Figure 4. Image after removing line </i></p>
 
 ## 4. Word segmentation
 I have compared between EAST and Scale Space techniques. You can see the result of EAST
 
 <p align="center"><img src="doc/timvanbanviettay3.jpg" width="400"></p>
-<p align="center"><i>Hình 5. EAST result </i></p>
+<p align="center"><i>Figure 5. EAST result </i></p>
 
 Pretty good hah! But these drawbacks made me decide to choose Scale Space technique:
 * Both width and height must be pre-resized to be multiples of 32 
@@ -76,7 +76,7 @@ Scale Space technique:
 Those steps could be easily applied with OpenCV, and with a few more steps I can extract the position of words and then seperate them to recognize. OLD BUT GOOD
 
 <p align="center"><img src="doc/wordImg_0.jpg" width="200"></p>
-<p align="center"><i>Hình 6. Word segmentation </i></p>
+<p align="center"><i>Figure 6. Word segmentation </i></p>
 
 Reference: https://www.researchgate.net/publication/2375892_Scale_Space_Technique_for_Word_Segmentation_in_Handwritten_Manuscripts
 
@@ -98,8 +98,8 @@ Reference:
 
 ## 6. Training
 I have created 2 Kaggle Notebooks for training name and student ID (MSSV). I had carefully explained stages there so I won't try writing all of them again here.
-* [Name training](https://www.kaggle.com/bomaich/vietnamese-handwritten-ocr-word-dataset)
-* [MSSV training](https://www.kaggle.com/bomaich/multi-digit-crnn-ctc)
+* [Name training notebook](https://www.kaggle.com/bomaich/vietnamese-handwritten-ocr-word-dataset)
+* [MSSV training notebook](https://www.kaggle.com/bomaich/multi-digit-crnn-ctc)
 
 I also used Early Stopping, Learning rate changing to increase the performance
 
@@ -116,12 +116,14 @@ The fisrt 2 tables are the evalution of 122 test papers of just my name and MSSV
 | -----|:---: |:---:|:---: |:---:|:---:|
 | CER | 35.25%	| 23.40% |	16.77% |	16.24% |	0.45% |
 | WER | 74.59%	| 69.40%	| 45.63%	| 47.27%	| 0.55% |
+<p align="center"><i> Table 1. Result of Name recognition on 122 images </i></p>
 
 **MSSV Recognition**
 |      | 7-digit number and blob noise | + Combination of 1,3,4,5,7-digit number | + Rotate, scale,  Random Cutout, Line Noise on digit images | + Changing the distance between digits. Scale, Rotate on multi-digit images| + Adding real data |+ Lexicon search |
 | -----|:---: |:---:|:---: |:---:|:---:|:---:|
 | CER | 63.82%	| 48.24%	| 45.55%	| 13.58%	| 3.63%	| 2.58%|
 | WER | 100.00%	 | 100.00%	| 100.00% |	63.11%	| 22.95%	| 6.56%|
+<p align="center"><i> Table 2. Result of Student ID recognition on 122 images </i></p>
 
 I have 70 test papers of other students written by 5 people (mostly by my family and friends due to Covid - 19). The accuracy is **97.14%** (just 2 out of 70 are uncorrect)
 
