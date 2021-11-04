@@ -7,6 +7,7 @@
 * [5. Model](#5-Model)
 * [6. Training](#6-K-fold-cross-validation)
 * [7. Result](#7-Result)
+* [8. Conclusion](#8-Conclusion)
 
 ## 1. Introduction
 This project is a part of my thesis. In short, you may or may not know that our teachers spend too much time on updating scores manually. In short, a secondary school teacher spend too much time on updating score manually (around 4000 test papers/year according to this [news](https://giaoduc.net.vn/giao-duc-24h/thong-tu-so-26-2020-tt-bgddt-da-go-bo-duoc-nhieu-ap-luc-cho-hoc-tro-va-giao-vien-post212222.gd) )
@@ -127,7 +128,7 @@ The first two tables show the results of 122 test papers with only my name and M
 
 I have 70 test papers of other students written by 5 people (mostly by my family and friends due to Covid - 19). The accuracy is **97.14%** (just 2 out of 70 are uncorrect)
 
-Conclusion:
+## 8. Conclusion
 * Add more real data to improve the outcome
 * The combination of CRNN - CTC, Attention help increase the result of Lexicon Search. I found the without Attention layer, CER and WER is lower (cause the model predicts less characters). Model with attention can be wrong but it's enough for Lexicon to perform well 
 * If you want to train your model faster, you should add Batch Normalization and Use Early stopping
