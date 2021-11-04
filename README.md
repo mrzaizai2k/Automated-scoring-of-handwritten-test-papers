@@ -9,27 +9,27 @@
 * [7. Result](#7-Result)
 
 ## 1. Introduction
-This project is a part of my thesis. In short, you guys may or may not know that our teachers spend too much time on updating scores. Around 4000 test papers/a year on average for a secondary school teacher according to this [news](https://giaoduc.net.vn/giao-duc-24h/thong-tu-so-26-2020-tt-bgddt-da-go-bo-duoc-nhieu-ap-luc-cho-hoc-tro-va-giao-vien-post212222.gd)
+This project is a part of my thesis. In short, you may or may not know that our teachers spend too much time on updating scores manually. In short, a secondary school teacher spend too much time on updating score manually (around 4000 test papers/year according to this [news](https://giaoduc.net.vn/giao-duc-24h/thong-tu-so-26-2020-tt-bgddt-da-go-bo-duoc-nhieu-ap-luc-cho-hoc-tro-va-giao-vien-post212222.gd) )
 
-The whole thesis is to help teacher update scores into Excel automatically after marking their students’ tests. But in this project we just extract information such as names, student ID, and recognize them to prepare for later stage.
+The goal of the thesis is to assist teachers in automatically updating results in Excel after marking their students' tests. However, in this project, we just collect data such as names and student IDs and recognize them in order to prepare for the next stage.
 
 <p align="center"><img src="data/sample/giaythi5.jpg" width="500"></p>
 <p align="center"><i>Figure 1. Test paper of Ho Chi Minh University of Technology </i></p>
 
-As you can see, I use my university's test paper. My name is Mai Chi Bao and my student ID (MSSV) is 1710586. Those are handwritten information and I wanna cut them out. Of course the score too. But we will dicuss about it later at other repository.
+As you can see, I use my university's test paper. My name is Mai Chi Bao and my student ID (MSSV) is 1710586. Those are handwritten information that I'd want to cut out. Of course, there's the score. But we'll talk about it at another repository later.
 
 
 ## 2. Dataset
 * Word dataset for name: [ICFHR2018 Competition on Vietnamese Online Handwritten Text Recognition Database (HANDS-VNOnDB2018)](http://tc11.cvc.uab.es/datasets/HANDS-VNOnDB2018_1/) . You can use `data/inkml_2_img.py` to covert ikml file into images
 * Digit dataset for student ID and score: MNIST dataset. I generated multi - digit number from MNIST. You can find the code in my [repo](https://github.com/mrzaizai2k/Multi-digit-images-generator-MNIST-)
 
-Those are raw data, of course they won't help at all without Data Augmentation
+Those are raw data, and without Data Augmentation, they won't assist at all.
 * Elastic Transform
 * Adding blob, line noise
 * Random Cutout
 * Rotate and Scale
 
-I applied them all in `source/prepare_MSSV_dataset.py` and `source/imgtocsv.py` for both name and student ID training. I found that those methods are not enough, so the solution is to collect more real data. I did add about 220 images for each, with Data augmentation I can make it to 20000 images and the result was good
+I applied them all in `source/prepare_MSSV_dataset.py` and `source/imgtocsv.py` for both name and student ID training. I found that those methods are not enough, so the solution is to collect more real data. I added about 220 photos for each, and with data augmentation, I was able to increase it to 20000 images, with good results.
 
 ## 3. Image Preprocessing
 You can find code in `source/Preprocessing.py` 
@@ -39,7 +39,7 @@ The flow of this stage is:
 3. Otsu Threshold
 4. Remove line/circle
 
-When we first take the input image, we take the background information too, and the picture is not in the right direction which is hard to extract and recognize. With the help of Image Alignment, the work is much easier. 
+We take the background information with the input image, and the picture is not in the proper direction, making it difficult to extract and recognize. The process is significantly easier with the aid of Image Alignment.
 
 <p align="center"><img src="doc/matches.jpg" width="500"></p>
 <p align="center"><i>Figure 2. Image Alignment </i></p>
@@ -53,7 +53,7 @@ Then I crop images I need with fixed pixels at all times
 
 I used contrast maximization with [Top hat and Black hat method](https://www.quora.com/Why-use-the-top-hat-and-black-hat-morphological-operations-in-image-processing). I found this can hold back lots of necessary information after Otsu Threshold, especially with blur images. 
 
-I did compare between Adaptive Threshold and Otsu Theshold. Adaptive Threshold which we know that works really well with variations in lighting conditions, shadowing... You can visit this [site](https://www.pyimagesearch.com/2021/05/12/adaptive-thresholding-with-opencv-cv2-adaptivethreshold/) to know more. But it also retains noise. It's like **a lot of noise** which is hard to remove line and recognize even having Gaussian Blur step before. Otsu turns out performing so well, I guess that because the small size of image after cropping reduces the effect of light variance.   
+I did compare between Adaptive Threshold and Otsu Theshold. Adaptive Threshold which we know that works really well with variations in lighting conditions, shadowing... You can visit this [site](https://www.pyimagesearch.com/2021/05/12/adaptive-thresholding-with-opencv-cv2-adaptivethreshold/) to know more. However, noise is retained. Even with the Gaussian Blur step. It's like **a lot of noise** which is hard to apply remove line and recognize step successfully. Otsu turns out performing so well, I guess that because the small size of image after cropping reduces the effect of light variance.   
 
 <p align="center"><img src="doc/removeline_122/namecrop_giaythi5.jpg" width="500"></p>
 <p align="center"><i>Figure 4. Image after removing line </i></p>
@@ -107,9 +107,9 @@ You can find the `.h5` model in my [google drive](https://drive.google.com/drive
 
 ## 7. Result
 
-The differences in word and number dataset lead to a cascade of differences in the way I trained model, set up parameters and evaluated. Here for the name recognition I will evaluate mainly on methods that I used in training phase. Due to the lack of real data, I would evaluate number recognition on the way I created dataset
+Because of the variations in the word and number datasets, I had to change the way I trained the model, set up parameters, and assessed it. For name recognition, I'll focus on the strategies I employed throughout the training phase. Due to the lack of real data, I'd evaluate number recognition based on how I built the dataset.
 
-The fisrt 2 tables are the evalution of 122 test papers of just my name and MSSV (with a wide range of light, camera angle and distance, picture resolution...) And use them to find my index in my class list of 245 students 
+The first two tables show the results of 122 test papers with only my name and MSSV on them (with a wide range of light, camera angle and distance, picture resolution...) And utilize them to identify my index in my 245-student class list.
 
 **Name Recognition**
 |      | CRNN + CTC | + Data Augmentation | + Learning Rate changing | + Attention | + Lexicon search |
@@ -129,7 +129,7 @@ I have 70 test papers of other students written by 5 people (mostly by my family
 
 Conclusion:
 * Add more real data to improve the outcome
-* The combination of CRNN - CTC, Attention, Lexicon Search
+* The combination of CRNN - CTC, Attention help increase the result of Lexicon Search. I found the without Attention layer, CER and WER is lower (cause the model predicts less characters). Model with attention can be wrong but it's enough for Lexicon to perform well 
 * If you want to train your model faster, you should add Batch Normalization and Use Early stopping
 * Changing Learning Rate help. But just in it's first time. The more you use it, the easier your model get overfit. And it slows down the training phase for nothing
 * Choosing the right Data Augmentation methods can boost the result up to 50%. Working on simulated data is fine, but if you want to use it in real life, you would need real dataset size is small
