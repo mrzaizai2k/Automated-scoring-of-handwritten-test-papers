@@ -1,4 +1,4 @@
-# Information-recognition-on-the-university-test-paper
+# Automated-scoring-of-handwritten-test-papers
 ## Table of contents
 * [1. Introduction](#1-Introduction)
 * [2. Dataset](#2-Dataset)
