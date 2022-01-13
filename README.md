@@ -126,8 +126,10 @@ I also used Early Stopping, Learning rate changing to increase the performance
 You can find the `.h5` model in my [google drive](https://drive.google.com/drive/folders/1z2GdAg8uz-ZCni1glbG1A-M6f7-R_6Y2?usp=sharing) because GitHub don't allow me to upload file bigger than 25Mb
 
 ## 8. Result
-
 Because of the variations in the word and number datasets, I had to change the way I trained the model, set up parameters, and assessed it. For name recognition, I'll focus on the strategies I employed throughout the training phase. Due to the lack of real data, I'd evaluate number recognition based on how I built the dataset.
+
+### 8.1 Result on 122 images set
+**For evaluating the impact of changes on Image processing and model structure**
 
 The first two tables show the results of 122 test papers with only my name and MSSV on them (with a wide range of light, camera angle and distance, picture resolution...) And utilize them to identify my index in my 245-student class list.
 
@@ -142,10 +144,38 @@ The first two tables show the results of 122 test papers with only my name and M
 |      | 7-digit number and blob noise | + Combination of 1,3,4,5,7-digit number | + Rotate, scale,  Random Cutout, Line Noise on digit images | + Changing the distance between digits. Scale, Rotate on multi-digit images| + Adding real data |+ Lexicon search |
 | -----|:---: |:---:|:---: |:---:|:---:|:---:|
 | CER | 63.82%	| 48.24%	| 45.55%	| 13.58%	| 3.63%	| 2.58%|
-| WER | 100.00%	 | 100.00%	| 100.00% |	63.11%	| 22.95%	| 6.56%|
+| WER | 100.00%	 | 100.00%	| 100.00% |	63.11%	| 22.95%	| 13.11%|
 <p align="center"><i> Table 2. Result of Student ID recognition on 122 images </i></p>
 
-I have 70 test papers of other students written by 5 people (mostly by my family and friends due to Covid - 19). The accuracy is **97.14%** (just 2 out of 70 are uncorrect)
+### 8.2 Result on 100 Unconstrained Images
+**For evaluating the performance of the system in bad condition**
+
+Unconstrained:
+* Background, camera angle, light
+* Font Type
+
+<p align="center"><img src="doc/Student Index Recognition on 100 Unconstrained set.PNG" width="600"></p>
+<p align="center"><i>Figure 4. Student Index Recognition on 100 Unconstrained set </i></p>
+
+<p align="center"><img src="doc/Student Score Recognition on 100 Unconstrained set.PNG" width="600"></p>
+<p align="center"><i>Figure 4. Student Score Recognition on 100 Unconstrained set </i></p>
+
+### 8.3 Result on 103 Constrained Images
+**For evaluating the performance of the system without the error from the user**
+
+Constrained:
+* Background, camera angle, light
+* Font Type
+
+<p align="center"><img src="doc/Student Index Recognition on 103 Constrained set.PNG" width="600"></p>
+<p align="center"><i>Figure 4. Student Index Recognition on 103 Constrained set </i></p>
+
+<p align="center"><img src="doc/Student Score Recognition on 103 Constrained set.PNG" width="600"></p>
+<p align="center"><i>Figure 4. Student Score Recognition on 103 Constrained set </i></p>
+
+### 8.4 Result on video
+Unlike recognition on each image which is quite easy to predict the right index (name & student ID) thanks to the Lexicon Search, it's really hard to increase the score recognition up to 90%. In the real environment where the system operate, images are continuously processed like video frames. Based on that idea, the score won't be updated unless the system recognizes the same information (name, student ID, score) 3 times in a row. The final result of the system is 95.55% (43/45 images)
+
 
 ## 9. Conclusion
 * Add more real data to improve the outcome
