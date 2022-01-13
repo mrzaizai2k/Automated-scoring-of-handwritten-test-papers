@@ -1,0 +1,150 @@
+len(X_train): 81804 
+len (X_valid): 20451 
+max_str_len: 10 
+num_of_characters: 11 
+num_of_timestamps: 31 
+batch_size: 128 
+epochs: 100 
+
+Average CER: 11.73%
+Average WER: 35.84%
+Correct characters predicted : 79.23%
+Correct words predicted      : 64.16%
+
+Train lại vs aug_digit_data13 gồm 69999 data ảo 13457 và 35256 data thực 
+đã được augment (799 ảnh data thực). Data đã được sửa lỗi lặp augment
+
+--------------------------
+Result on Class_70
+
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_05_2021-11-26.h5
+score_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_05_2021-11-26.h5
+
+The number of correct recognization: 67. The total images: 70
+The uncorrect index are:[35, 43, 70]
+The uncorrect score are:[12, 13, 17, 21, 26, 27, 29, 35, 38, 39, 40, 42, 43, 49, 5, 52, 53, 55, 59, 6, 60, 67, 68, 70, 72]
+Name & MSSV Accuracy:95.71428571428571
+Score Accuracy:64.28571428571429
+
+
+--------------------------
+Result on Main_122
+word_model_dir: model\model_word/2021-11-07\word_model_16_2021-11-07.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_05_2021-11-26.h5
+
+Average CER names: 33.90%
+Average WER names: 73.50%
+
+
+Average CER MSSV: 1.52%
+Average WER MSSV: 9.02%
+
+
+Average CER diem: 98.36%
+Average WER diem: 98.36%
+--------------------------
+Result on Class_70
+
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_last_2021-11-26.h5
+
+The number of correct recognization: 67. The total images: 70
+The uncorrect index are:[35, 43, 69]
+The uncorrect score are:[12, 13, 15, 20, 21, 23, 26, 27, 29, 38, 39, 40, 42, 43, 52, 54, 59, 60, 67, 68, 72]
+
+Name & MSSV Accuracy:95.71%
+Score Accuracy:70.00%
+--------------------------
+Result on Main_122
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_last_2021-11-26.h5
+
+Average CER names: 23.77%
+Average WER names: 53.55%
+
+
+Average CER MSSV: 2.22%
+Average WER MSSV: 13.11%
+
+
+Average CER diem: 79.51%
+Average WER diem: 79.51%
+--------------------------
+Result on Class_61
+** Đã loại bỏ hình tiền xử lý sai và hình có điểm sai
+
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_last_2021-11-26.h5
+
+The number of correct recognization: 58. The total images: 61
+The uncorrect index are:[35, 43, 69]
+The uncorrect score are:[12, 13, 15, 20, 23, 26, 29, 42, 43, 52, 54, 60, 72]
+
+Name & MSSV Accuracy:95.08%
+Score Accuracy:78.69%
+--------------------------
+Result on Class_70
+
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_last_2021-11-26.h5
+
+The number of correct recognization: 67. The total images: 70
+The uncorrect index are:[35, 43, 69]
+The uncorrect score are:[12, 13, 15, 20, 21, 23, 26, 27, 29, 38, 39, 40, 42, 43, 52, 54, 59, 60, 67, 68, 72]
+
+Name & MSSV Accuracy:95.71%
+Score Accuracy:70.00%
+--------------------------
+
+--------------------------
+Result on Class_100
+
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_last_2021-11-26.h5
+
+The number of correct recognization: 86. The total images: 100
+The uncorrect index are:[100, 105, 142, 144, 145, 146, 35, 43, 59, 69, 87, 95, 98, 99]
+The uncorrect score are:[100, 104, 106, 107, 12, 127, 13, 138, 15, 20, 21, 23, 26, 27, 29, 38, 39, 40, 42, 43, 52, 54, 59, 60, 67, 68, 72, 87, 88, 92, 93, 95, 99]
+
+Name & MSSV Accuracy:86.00%
+Score Accuracy:67.00%
+--------------------------
+Result on Class_100
+1000 points
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_last_2021-11-26.h5
+
+The number of correct recognization: 86. The total images: 100
+The uncorrect index are:[100, 105, 142, 144, 145, 146, 35, 43, 59, 69, 87, 95, 98, 99]
+The uncorrect score are:[100, 104, 106, 107, 12, 127, 13, 138, 15, 20, 21, 23, 26, 27, 29, 38, 39, 40, 42, 43, 52, 54, 59, 60, 67, 68, 72, 87, 88, 92, 93, 95, 99]
+
+Name & MSSV Accuracy:86.00%
+Score Accuracy:67.00%
+
+--------------------------
+Result on Class_100
+4000 points
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_last_2021-11-26.h5
+
+The number of correct recognization: 86. The total images: 100
+The uncorrect index are:[100, 105, 12, 140, 142, 144, 145, 146, 31, 35, 50, 62, 70, 98]
+The uncorrect score are:[100, 106, 112, 12, 127, 13, 138, 144, 15, 19, 2, 21, 26, 29, 43, 46, 50, 52, 54, 55, 60, 62, 64, 68, 72, 88, 92, 93, 96, 99]
+
+Name & MSSV Accuracy:86.00%
+Score Accuracy:70.00%
+--------------------------
+
+--------------------------
+Result on Class_80
+
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-11-26_3\digit_model_last_2021-11-26.h5
+
+The number of correct recognization: 72. The total images: 80
+The uncorrect index are:[114, 125, 159, 163, 168, 169, 175, 182]
+The uncorrect score are:[114, 121, 125, 127, 136, 149, 153, 154, 159, 161, 162, 176, 181, 182, 185, 193, 196, 197, 199, 202, 205, 209, 211]
+
+Name & MSSV Accuracy:90.00%
+Score Accuracy:71.25%

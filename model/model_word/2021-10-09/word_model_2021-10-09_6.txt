@@ -1,0 +1,58 @@
+len(X_train): 94123 
+len (X_valid): 16611 
+max_str_len: 11 
+num_of_characters: 148 
+num_of_timestamps: 31 
+batch_size: 128 
+epochs: 100 
+
+Average CER: 9.08%
+Average WER: 20.28%
+Correct characters predicted : 88.62%
+Correct words predicted      : 79.72%
+--------------------------
+Result on Main_122
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-10-08\digit_model_last.h5
+
+Average CER names: 16.24%
+Average WER names: 47.27%
+
+
+Average CER MSSV: 60.77%
+Average WER MSSV: 100.00%
+--------------------------
+Result on Main_122
+word_model_dir: model\model_word/2021-10-09\word_model_10_2021-10-09_6.h5
+digit_model_dir: model\multi_digit_model/2021-10-08\digit_model_last.h5
+
+Average CER names: 20.64%
+Average WER names: 60.38%
+
+
+Average CER MSSV: 60.77%
+Average WER MSSV: 100.00%
+--------------------------
+Result on Main_122
+model attention, lexicon search
+word_model_dir: model\model_word/2021-10-09\word_model_last_6.h5
+digit_model_dir: model\multi_digit_model/2021-10-08\digit_model_last.h5
+
+Average CER names: 3.20%
+Average WER names: 8.47%
+
+
+Average CER MSSV: 60.77%
+Average WER MSSV: 100.00%
+--------------------------
+Result on Main_122
+model thường, lexicon search
+word_model_dir: model\model_word/2021-10-05\word_model_25_2021-10-05_2.h5
+digit_model_dir: model\multi_digit_model/2021-10-08\digit_model_last.h5
+
+Average CER names: 3.13%
+Average WER names: 6.56%
+
+
+Average CER MSSV: 60.77%
+Average WER MSSV: 100.00%
