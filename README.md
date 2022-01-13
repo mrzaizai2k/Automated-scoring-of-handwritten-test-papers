@@ -34,7 +34,7 @@ The GUI:
 After pressing the Start button, It'll appear the Test paper Image. I'll update the youtube video when I'm using it for you guys ASAP
 
 <p align="center"><img src="doc/GUI.png" width="500"></p>
-<p align="center"><i>Figure 1. GUI </i></p>
+<p align="center"><i>Figure 2. GUI </i></p>
 
 ## 3. Dataset
 * Word dataset for name: [ICFHR2018 Competition on Vietnamese Online Handwritten Text Recognition Database (HANDS-VNOnDB2018)](http://tc11.cvc.uab.es/datasets/HANDS-VNOnDB2018_1/) . You can use `data/inkml_2_img.py` to covert ikml file into images
@@ -59,27 +59,27 @@ The flow of this stage is:
 We take the background information with the input image, and the picture is not in the proper direction, making it difficult to extract and recognize. The process is significantly easier with the aid of Image Alignment.
 
 <p align="center"><img src="doc/matches.jpg" width="500"></p>
-<p align="center"><i>Figure 2. Image Alignment </i></p>
+<p align="center"><i>Figure 3. Image Alignment </i></p>
 
 Reference: https://www.pyimagesearch.com/2020/08/31/image-alignment-and-registration-with-opencv/
 
 Then I crop images I need with fixed pixels at all times
 
 <p align="center"><img src="doc/MSSV_crop.jpg" width="200"></p>
-<p align="center"><i>Figure 3. MSSV_crop.jpg </i></p>
+<p align="center"><i>Figure 4. MSSV_crop.jpg </i></p>
 
 I used contrast maximization with [Top hat and Black hat method](https://www.quora.com/Why-use-the-top-hat-and-black-hat-morphological-operations-in-image-processing). I found this can hold back lots of necessary information after Otsu Threshold, especially with blur images. 
 
 I did compare between Adaptive Threshold and Otsu Theshold. Adaptive Threshold which we know that works really well with variations in lighting conditions, shadowing... You can visit this [site](https://www.pyimagesearch.com/2021/05/12/adaptive-thresholding-with-opencv-cv2-adaptivethreshold/) to know more. However, noise is retained. Even with the Gaussian Blur step. It's like **a lot of noise** which is hard to apply remove line and recognize step successfully. Otsu turns out performing so well, I guess that because the small size of image after cropping reduces the effect of light variance.   
 
 <p align="center"><img src="doc/removeline_122/namecrop_giaythi5.jpg" width="500"></p>
-<p align="center"><i>Figure 4. Image after removing line </i></p>
+<p align="center"><i>Figure 5. Image after removing line </i></p>
 
 ## 5. Word segmentation
 I have compared between EAST and Scale Space techniques. You can see the result of EAST
 
 <p align="center"><img src="doc/timvanbanviettay3.jpg" width="400"></p>
-<p align="center"><i>Figure 5. EAST result </i></p>
+<p align="center"><i>Figure 6. EAST result </i></p>
 
 Pretty good hah! But these drawbacks made me decide to choose Scale Space technique:
 * Both width and height must be pre-resized to be multiples of 32 
@@ -93,7 +93,7 @@ Scale Space technique:
 Those steps could be easily applied with OpenCV, and with a few more steps I can extract the position of words and then seperate them to recognize. OLD BUT GOOD
 
 <p align="center"><img src="doc/wordImg_0.jpg" width="200"></p>
-<p align="center"><i>Figure 6. Word segmentation </i></p>
+<p align="center"><i>Figure 7. Word segmentation </i></p>
 
 Reference: https://www.researchgate.net/publication/2375892_Scale_Space_Technique_for_Word_Segmentation_in_Handwritten_Manuscripts
 
@@ -101,7 +101,7 @@ Reference: https://www.researchgate.net/publication/2375892_Scale_Space_Techniqu
 My model here is CRNN + Attention + CTC Loss
 
 <p align="center"><img src="doc/model-used.jpg" width="500"></p>
-<p align="center"><i>Figure 6. Model Structure </i></p>
+<p align="center"><i>Figure 8. Model Structure </i></p>
 
 I will briefly describe the model. You can easily find papers about this model cause it's too famous
 * CNN: Image feature extraction
@@ -155,10 +155,10 @@ Unconstrained:
 * Font Type
 
 <p align="center"><img src="doc/Student Index Recognition on 100 Unconstrained set.PNG" width="600"></p>
-<p align="center"><i>Figure 4. Student Index Recognition on 100 Unconstrained set </i></p>
+<p align="center"><i>Figure 9. Student Index Recognition on 100 Unconstrained set </i></p>
 
 <p align="center"><img src="doc/Student Score Recognition on 100 Unconstrained set.PNG" width="600"></p>
-<p align="center"><i>Figure 4. Student Score Recognition on 100 Unconstrained set </i></p>
+<p align="center"><i>Figure 10. Student Score Recognition on 100 Unconstrained set </i></p>
 
 ### 8.3 Result on 103 Constrained Images
 **For evaluating the performance of the system without the error from the user**
@@ -168,14 +168,18 @@ Constrained:
 * Font Type
 
 <p align="center"><img src="doc/Student Index Recognition on 103 Constrained set.PNG" width="600"></p>
-<p align="center"><i>Figure 4. Student Index Recognition on 103 Constrained set </i></p>
+<p align="center"><i>Figure 11. Student Index Recognition on 103 Constrained set </i></p>
 
 <p align="center"><img src="doc/Student Score Recognition on 103 Constrained set.PNG" width="600"></p>
-<p align="center"><i>Figure 4. Student Score Recognition on 103 Constrained set </i></p>
+<p align="center"><i>Figure 12. Student Score Recognition on 103 Constrained set </i></p>
 
 ### 8.4 Result on video
-Unlike recognition on each image which is quite easy to predict the right index (name & student ID) thanks to the Lexicon Search, it's really hard to increase the score recognition up to 90%. In the real environment where the system operate, images are continuously processed like video frames. Based on that idea, the score won't be updated unless the system recognizes the same information (name, student ID, score) 3 times in a row. The final result of the system is 95.55% (43/45 images)
+Unlike recognition on each image which is quite easy to predict the right index (name & student ID) thanks to the Lexicon Search, it's really hard to increase the accuracy of score recognition up to 90%. In the real environment where the system operate, images are continuously processed like video frames. Based on that idea, the score won't be updated unless the system recognizes the same information (name, student ID, score) 3 times in a row.
 
+**The final result of the system is 95.55% (43/45 images)**
+
+<p align="center"><img src="doc/Flowchart diagram for video recognition.jpg" width="900"></p>
+<p align="center"><i>Figure 13. Flowchart diagram for video recognitiont </i></p>
 
 ## 9. Conclusion
 * Add more real data to improve the outcome
