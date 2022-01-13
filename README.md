@@ -1,13 +1,15 @@
 # Automated-scoring-of-handwritten-test-papers
+**For Vietnamese student, you can read the `LVTN_Mai Chí Bảo_1710586.pdf` and `LVTN_Mai Chí Bảo_1710586.pptx` which is written in Vietnamese. For foreign reader, I'll update the English version ASAP**
 ## Table of contents
 * [1. Introduction](#1-Introduction)
-* [2. Dataset](#2-Dataset)
-* [3. Image preprocessing](#3-Image-preprocessing)
-* [4. Word segmentation](#4-Word-segmentation)
-* [5. Model](#5-Model)
-* [6. Training](#6-K-fold-cross-validation)
-* [7. Result](#7-Result)
-* [8. Conclusion](#8-Conclusion)
+* [2. User](#2-User)
+* [3. Dataset](#3-Dataset)
+* [4. Image preprocessing](#4-Image-preprocessing)
+* [5. Word segmentation](#5-Word-segmentation)
+* [6. Model](#6-Model)
+* [7. Training](#7-Training)
+* [8. Result](#8-Result)
+* [9. Conclusion](#9-Conclusion)
 
 ## 1. Introduction
 This project is a part of my thesis. In short, you may or may not know that our teachers spend too much time on updating scores manually. In short, a secondary school teacher spend too much time on updating score manually (around 4000 test papers/year according to this [news](https://giaoduc.net.vn/giao-duc-24h/thong-tu-so-26-2020-tt-bgddt-da-go-bo-duoc-nhieu-ap-luc-cho-hoc-tro-va-giao-vien-post212222.gd) )
@@ -19,8 +21,22 @@ The goal of the thesis is to assist teachers in automatically updating results i
 
 As you can see, I use my university's test paper. My name is Mai Chi Bao and my student ID (MSSV) is 1710586. Those are handwritten information that I'd want to cut out. Of course, there's the score. But we'll talk about it at another repository later.
 
+## 2. User
+The workflow of this system is like this
+1. Image is continuously captured by the phone's camera which already have this App called [IP Camera](https://www.youtube.com/watch?v=POX772xjHws)
+2. Computer will take Image from the Web Server of the IP Camera App to process
+3. Automatically update the score into Excel like this `data/Class_list.xlsx`
 
-## 2. Dataset
+The GUI: 
+* 1 Text box for entering the Web Server address 
+* 1 Broswer file button to choose the Class list file in our laptop
+* 3 button: Start, Quit, Save
+After pressing the Start button, It'll appear the Test paper Image. I'll update the youtube video when I'm using it for you guys ASAP
+
+<p align="center"><img src="doc/GUI.png" width="500"></p>
+<p align="center"><i>Figure 1. GUI </i></p>
+
+## 3. Dataset
 * Word dataset for name: [ICFHR2018 Competition on Vietnamese Online Handwritten Text Recognition Database (HANDS-VNOnDB2018)](http://tc11.cvc.uab.es/datasets/HANDS-VNOnDB2018_1/) . You can use `data/inkml_2_img.py` to covert ikml file into images
 * Digit dataset for student ID and score: MNIST dataset. I generated multi - digit number from MNIST. You can find the code in my [repo](https://github.com/mrzaizai2k/Multi-digit-images-generator-MNIST-)
 
@@ -32,7 +48,7 @@ Those are raw data, and without Data Augmentation, they won't assist at all.
 
 I applied them all in `source/prepare_MSSV_dataset.py` and `source/imgtocsv.py` for both name and student ID training. I found that those methods are not enough, so the solution is to collect more real data. I added about 220 photos for each, and with data augmentation, I was able to increase it to 20000 images, with good results.
 
-## 3. Image Preprocessing
+## 4. Image Preprocessing
 You can find code in `source/Preprocessing.py` 
 The flow of this stage is:
 1. Image Alignment 
@@ -59,7 +75,7 @@ I did compare between Adaptive Threshold and Otsu Theshold. Adaptive Threshold w
 <p align="center"><img src="doc/removeline_122/namecrop_giaythi5.jpg" width="500"></p>
 <p align="center"><i>Figure 4. Image after removing line </i></p>
 
-## 4. Word segmentation
+## 5. Word segmentation
 I have compared between EAST and Scale Space techniques. You can see the result of EAST
 
 <p align="center"><img src="doc/timvanbanviettay3.jpg" width="400"></p>
@@ -81,8 +97,11 @@ Those steps could be easily applied with OpenCV, and with a few more steps I can
 
 Reference: https://www.researchgate.net/publication/2375892_Scale_Space_Technique_for_Word_Segmentation_in_Handwritten_Manuscripts
 
-## 5. Model
+## 6. Model
 My model here is CRNN + Attention + CTC Loss
+
+<p align="center"><img src="doc/model-used.jpg" width="500"></p>
+<p align="center"><i>Figure 6. Model Structure </i></p>
 
 I will briefly describe the model. You can easily find papers about this model cause it's too famous
 * CNN: Image feature extraction
@@ -97,7 +116,7 @@ Reference:
 * CTC loss: https://distill.pub/2017/ctc/
 * Attention: http://www.wildml.com/2016/01/attention-and-memory-in-deep-learning-and-nlp/
 
-## 6. Training
+## 7. Training
 I have created 2 Kaggle Notebooks for training name and student ID (MSSV). I had carefully explained stages there so I won't try writing all of them again here.
 * [Name training notebook](https://www.kaggle.com/bomaich/vietnamese-handwritten-ocr-word-dataset)
 * [MSSV training notebook](https://www.kaggle.com/bomaich/multi-digit-crnn-ctc)
@@ -106,7 +125,7 @@ I also used Early Stopping, Learning rate changing to increase the performance
 
 You can find the `.h5` model in my [google drive](https://drive.google.com/drive/folders/1z2GdAg8uz-ZCni1glbG1A-M6f7-R_6Y2?usp=sharing) because GitHub don't allow me to upload file bigger than 25Mb
 
-## 7. Result
+## 8. Result
 
 Because of the variations in the word and number datasets, I had to change the way I trained the model, set up parameters, and assessed it. For name recognition, I'll focus on the strategies I employed throughout the training phase. Due to the lack of real data, I'd evaluate number recognition based on how I built the dataset.
 
@@ -128,7 +147,7 @@ The first two tables show the results of 122 test papers with only my name and M
 
 I have 70 test papers of other students written by 5 people (mostly by my family and friends due to Covid - 19). The accuracy is **97.14%** (just 2 out of 70 are uncorrect)
 
-## 8. Conclusion
+## 9. Conclusion
 * Add more real data to improve the outcome
 * The combination of CRNN - CTC, Attention help increase the result of Lexicon Search. I found the without Attention layer, CER and WER is lower (cause the model predicts less characters). Model with attention can be wrong but it's enough for Lexicon to perform well 
 * If you want to train your model faster, you should add Batch Normalization and Use Early stopping
