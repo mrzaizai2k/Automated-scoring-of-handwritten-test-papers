@@ -13,7 +13,7 @@
 * [9. Conclusion](#9-Conclusion)
 
 ## 1. Introduction
-This project is a part of my thesis. In short, you may or may not know that our teachers spend too much time on updating scores manually. In short, a secondary school teacher spend too much time on updating score manually (around 4000 test papers/year according to this [news](https://giaoduc.net.vn/giao-duc-24h/thong-tu-so-26-2020-tt-bgddt-da-go-bo-duoc-nhieu-ap-luc-cho-hoc-tro-va-giao-vien-post212222.gd) )
+This project is a part of my thesis. In short, a secondary school teacher spend too much time on updating score manually (around 4000 test papers/year according to this [news](https://giaoduc.net.vn/giao-duc-24h/thong-tu-so-26-2020-tt-bgddt-da-go-bo-duoc-nhieu-ap-luc-cho-hoc-tro-va-giao-vien-post212222.gd) )
 
 The goal of the thesis is to assist teachers in automatically updating results in Excel after marking their students' tests. However, in this project, we just collect data such as names and student IDs and recognize them in order to prepare for the next stage.
 
