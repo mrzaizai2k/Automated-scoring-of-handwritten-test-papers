@@ -1,6 +1,8 @@
 # Automated-scoring-of-handwritten-test-papers
 **For Vietnamese student, you can read the `LVTN_Mai Chí Bảo_1710586.pdf` and `LVTN_Mai Chí Bảo_1710586.pptx` which is written in Vietnamese. For foreign reader, I'll update the English version ASAP**
 * Hệ thống nhập điểm tự động từ ảnh bài thi - Demo on Youtube: https://youtu.be/EUY0zR642f0
+* Automatic Scoring of Handwritten test papers (Youtube - link full): https://youtu.be/k-DV2W6-xdE
+
 ## Table of contents
 * [1. Introduction](#1-Introduction)
 * [2. User](#2-User)
