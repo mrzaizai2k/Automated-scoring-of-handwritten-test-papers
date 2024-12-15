@@ -130,7 +130,7 @@ I have created 2 Kaggle Notebooks for training name and student ID (MSSV). I had
 
 I also used Early Stopping, Learning rate changing to increase the performance
 
-You can find the `.h5` model in my [google drive](https://drive.google.com/drive/folders/1z2GdAg8uz-ZCni1glbG1A-M6f7-R_6Y2?usp=sharing) because GitHub don't allow me to upload file bigger than 25Mb
+You can find the `.h5` model in my [Release model](https://github.com/mrzaizai2k/Automated-scoring-of-handwritten-test-papers/releases/tag/Model) because GitHub don't allow me to upload file bigger than 25Mb
 
 ## 8. Result
 Because of the variations in the word and number datasets, I had to change the way I trained the model, set up parameters, and assessed it. For name recognition, I'll focus on the strategies I employed throughout the training phase. Due to the lack of real data, I'd evaluate number recognition based on how I built the dataset.
